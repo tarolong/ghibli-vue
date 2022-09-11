@@ -9,14 +9,20 @@
     </div>
 </template>
 <script>
+import { onUpdated } from '@vue/runtime-core';
     import { useRouter } from 'vue-router';
     export default {
         props: ['item'],
         setup(props) {
             const router = useRouter();
             const detailShow = () => {
+                window.scrollTo(0,0);
+                document.querySelector('html').style.overflowY = 'hidden';
                 router.push('/detail/' + props.item.id)
             }
+            onUpdated ( () => {
+                
+            })
             return {
                 detailShow
             }

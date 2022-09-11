@@ -4,16 +4,19 @@
     </div>
 </template>
 <script>
-    import { computed } from 'vue'
+    import { computed, onUpdated } from 'vue'
     import { useStore } from 'vuex';
     import MovieList from '../components/MovieList.vue'
     export default {
         components: {
             MovieList
         },
-        setup() {
+        setup(props, context) {
             const store = useStore();
             const movieList = computed(() => store.getters.getMovieList);
+            onUpdated ( () => {
+                context.emit('start')
+            })
             return {
                 movieList
             }

@@ -1,18 +1,30 @@
 <template>
   <div class="wrap">
+    <Transition name="fade">
+      <div class="intro" v-if="show"></div>
+    </Transition>
     <div class="container">
-      <RouterView/>
+      <RouterView @start="startFN"/>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from '@vue/runtime-core';
   import { useStore } from 'vuex';
   export default {
     setup() {
+      const show = ref(true);
       const store = useStore();
       store.dispatch('fetchMovieList');
+      const startFN = () => {
+        window.scrollTo(0,0);
+        document.querySelector('html').style.overflowY = 'auto';
+        show.value = false;
+      }
       return {      
+        startFN,
+        show
       }
     }
   }
@@ -64,6 +76,11 @@
       display: none;
   }
 
+  html {
+    overflow-x: hidden;
+    overflow-y:hidden;
+  }
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-color: #eff3f7;
@@ -79,5 +96,27 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;    
+  }
+  .intro {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    background: #fff url('@/assets/intro.jpg') no-repeat center;
+
+    opacity: 1;
+    transition: opacity 5s;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>

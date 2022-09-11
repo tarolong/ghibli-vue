@@ -27,19 +27,24 @@
             </div>
         </div>
     </div>
+    
+    <Transition name="fade">
+        <div class="dim" v-if="loading"></div>
+    </Transition>
 
 </template>
 <script>
-    import { computed, onUpdated,ref } from 'vue'
+    import { computed, onMounted, onUpdated, ref } from 'vue'
     import { useStore } from 'vuex';
     import { useRoute, useRouter } from 'vue-router'
     export default {
-        setup() {
-            const loading = ref(false);
+        setup(props, context) {
+            const loading = ref(true);
             const route = useRoute();
             const router = useRouter();
             
             const back = () => {
+                // window.scrollTo(0,0);
                 router.push('/')
             }
 
@@ -47,9 +52,15 @@
             const store = useStore();
             store.dispatch('fetchMovieItem', id);
             const movieItem = computed(() => store.getters.getMovieDetailItem);
-            onUpdated( () => {
-                loading.value = true;              
+            onMounted( () => {             
             });
+
+            onUpdated ( () => {
+                loading.value = false; 
+                context.emit('start')
+            })
+            
+
             return {
                 movieItem,
                 back,
@@ -63,7 +74,7 @@
         position: relative;
         display: block;
         width: 100%;
-        height: 100vh;
+        height: 100%;
 
     }
     .movie-detail-box {
@@ -139,6 +150,34 @@
         border-radius: 3px;
         cursor: pointer;
     }
+
+    .dim {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 999;
+    }
+  .dim {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    background: #fff url('@/assets/loading.jpg') no-repeat center;
+    background-size: cover;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
     
 
     @media screen and (max-width: 1000px) {

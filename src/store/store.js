@@ -28,7 +28,7 @@ export default createStore({
             state.movieList = payload
         },
         MOVIE_DETAIL_ITEM(state, payload) {
-            state.movieItem = payload
+            state.movieItem = payload;
         }
     },
     getters: {

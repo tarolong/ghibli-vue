@@ -1,26 +1,16 @@
 <template>
   <div class="wrap">
-    <div v-for="(item, index) in movieList" :key="index">
-        <a href="#"><img :src="item.image" /></a>
-        <a href="#"><h2>{{item.title}} <small>({{item.original_title}})</small></h2></a>
-        <p>
-          {{item.description}}
-        </p>
-        <a href="#">more...</a>
-      </div>
+    <RouterView/>
   </div>
 </template>
 
 <script>
-  import {computed} from 'vue'
-  import {useStore} from 'vuex'
+  import { useStore } from 'vuex';
   export default {
     setup() {
       const store = useStore();
       store.dispatch('fetchMovieList');
-      const movieList = computed(() => store.getters.getMovieList);
       return {      
-        movieList
       }
     }
   }

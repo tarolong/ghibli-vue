@@ -10,4 +10,9 @@ function fetchApi() {
    return axios.get(`${config.baseUrl}/films`)
 }
 
-export { fetchApi }
+// 함수 설정
+function fetchApiItem(_id) {
+    return axios.get(`${config.baseUrl}/films/${_id}`)
+ }
+
+export { fetchApi, fetchApiItem }

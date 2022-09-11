@@ -24,10 +24,11 @@
     .movie {
         position: relative;
         display: block;
-        width: 49%;
+        width: 48%;
 
         background-color: #fff;
         margin-bottom: 70px;
+        margin-top: 20px;
         font-weight: 300;
         padding: 20px;
         border-radius: 5px;

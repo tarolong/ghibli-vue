@@ -1,6 +1,8 @@
 <template>
   <div class="wrap">
-    <RouterView/>
+    <div class="container">
+      <RouterView/>
+    </div>
   </div>
 </template>
 
@@ -34,8 +36,49 @@
     color: #333;
     text-decoration: none;
   }
+  html {
+    scrollbar-3dLight-Color: #efefef;
+    scrollbar-arrow-color: #dfdfdf;
+    scrollbar-base-color: #efefef;
+    scrollbar-Face-Color: #dfdfdf;
+    scrollbar-Track-Color: #efefef;
+    scrollbar-DarkShadow-Color: #efefef;
+    scrollbar-Highlight-Color: #efefef;
+    scrollbar-Shadow-Color: #efefef;
+    -ms-overflow-style: none;
+    overflow: auto;
+  }
+  ::-webkit-scrollbar {
+      width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+      background-color: #619ab4;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, #1697bf, #62b7ac);
+  }
+
+  ::-webkit-scrollbar-button {
+      display: none;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background-color: #eff3f7;
+    height: 100%;
+  }
   .wrap {
     position: relative;
     display: block;
+    width: 100%;
+    padding: 50px 0;
+  }
+  .container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;    
   }
 </style>
